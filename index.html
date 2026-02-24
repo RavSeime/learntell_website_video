@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>LearnTell</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Calendly -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #2496df;
+      --blue-light: #e8f4fd;
+      --blue-dark: #1a78b8;
+      --text: #111214;
+      --muted: #6b7280;
+      --border: #e5e9ef;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--blue); }
+
+    .nav-cta {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--blue-dark); }
+
+    /* HERO */
+    .hero {
+      padding: 140px 48px 0;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.99rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: var(--blue-light);
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--blue);
+      margin: 0 auto 48px;
+      opacity: 0.4;
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 48px;
+    }
+
+    /* Reduce gap between hero and "What we do" */
+    .intro-text { padding-top: 16px; }
+
+    section + section {
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+
+    /* INTRO TEXT */
+    .intro-text h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+
+    .intro-text p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 640px;
+    }
+
+    /* VIDEO */
+    .video-section {
+      padding-top: 0;
+      padding-bottom: 64px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 40px rgba(36,150,223,0.10), 0 2px 8px rgba(0,0,0,0.06);
+      background: #f4f8fc;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    /* VIDEO PLACEHOLDER */
+    .video-placeholder {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f0f7ff 0%, #e8f4fd 100%);
+      color: var(--muted);
+    }
+
+    .play-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .play-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: white;
+      margin-left: 3px;
+    }
+
+    .video-placeholder p {
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* CALENDLY */
+    .calendly-section {}
+
+    .calendly-section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .calendly-section p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .calendly-inline-widget {
+      min-width: 320px;
+      height: 700px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    /* CONTACT */
+    .contact-section {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .contact-photo {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--blue-light);
+      flex-shrink: 0;
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .contact-photo-placeholder {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: var(--blue-light);
+      border: 3px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      font-size: 2rem;
+      font-family: 'DM Serif Display', serif;
+    }
+
+    .contact-info h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .contact-info p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue);
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .contact-email:hover { border-color: var(--blue); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 28px 48px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    /* ANIMATION */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 24px; }
+      .hero { padding: 120px 24px 60px; }
+      section { padding: 48px 24px; }
+      .intro-text { padding-top: 20px; }
+      .contact-section { flex-direction: column; text-align: center; }
+      .contact-email { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Learn<span>Tell</span></a>
+    <a href="#book" class="nav-cta">Book a call</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">For course creators</div>
+    <h1>The future of education is not a monologue.<br><em>It's a conversation.</em></h1>
+    <p class="hero-tagline">LearnTell uncovers the blind spots quietly holding your business back, through AI-powered student interviews that go deeper than any survey.</p>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro-text fade-in">
+    <div class="section-label">What we do</div>
+    <h2>Your students know what you need to know.<br>We help you hear them.</h2>
+    <p>Most course creators guess at core questions like why students buy, where they drop off, and what to build next. LearnTell replaces the guessing with real intelligence: interviewing every single one of your students at scale, then turning that data into concrete actions that grow your business.</p>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="video-section fade-in">
+    <div class="section-label">Watch the story</div>
+    <div style="margin-bottom: 24px;">
+      <h2 style="font-family: 'DM Serif Display', serif; font-size: clamp(1.5rem,3vw,2.1rem); letter-spacing: -0.02em; margin-bottom: 8px;">See how it works</h2>
+      <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.7; max-width: 560px;">Watch David's story: a course creator who discovers what was quietly holding his business back.</p>
+    </div>
+    <div class="video-wrapper">
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/jUo5oku9ohI"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- CALENDLY -->
+  <section class="calendly-section fade-in" id="book">
+    <div class="section-label">Book a call</div>
+    <h2>Let's see if we're a good fit.</h2>
+    <p>We only take on a handful of clients at a time because every business deserves proper attention. Book a free call and we'll find out if LearnTell is right for you.</p>
+    <div class="calendly-inline-widget" data-url="https://calendly.com/henand24/30min?hide_gdpr_banner=1&primary_color=2496df"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="fade-in">
+    <div class="section-label">Get in touch</div>
+    <div style="display: flex; flex-direction: column; gap: 32px;">
+
+      <div class="contact-section">
+        <img
+          src="henrik.png"
+          alt="Henrik"
+          class="contact-photo"
+          loading="lazy"
+          decoding="async"
+          onerror="this.style.display='none'; this.insertAdjacentHTML('afterend','<div class=&quot;contact-photo-placeholder&quot;>H</div>');"
+        >
+        <div class="contact-info">
+          <h3>Henrik</h3>
+          <p>CEO &amp; Co-founder, LearnTell &middot; Bergen, Norway</p>
+          <a href="mailto:henrik@learntell.ai" class="contact-email">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            henrik@learntell.ai
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-section">
+        <img
+          src="Rav.png"
+          alt="Rav"
+          class="contact-photo"
+          loading="lazy"
+          decoding="async"
+          onerror="this.style.display='none'; this.insertAdjacentHTML('afterend','<div class=&quot;contact-photo-placeholder&quot;>R</div>');"
+        >
+        <div class="contact-info">
+          <h3>Rav</h3>
+          <p>CTO &amp; Co-founder, LearnTell &middot; Bergen, Norway</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 LearnTell. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Scroll animations
+    const els = document.querySelectorAll('.fade-in');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    els.forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
